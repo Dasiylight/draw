@@ -1,4 +1,4 @@
 module.exports = {
-  // publicPath:'./'
-  publicPath: process.env.NODE_ENV === "production" ? "/draw/" : "./"
+  publicPath:'./'
+  // publicPath: process.env.NODE_ENV === "production" ? "/draw/" : "./"
  };
