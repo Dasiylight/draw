@@ -1,14 +1,22 @@
-# deploy.sh
-# 错误时停止
 set -e
-# 打包
+
+# 构建
 npm run build
-# 进入目标文件夹
+
+# cd 到构建输出的目录下 
 cd dist
-# 提交到本地仓库
+
+# 部署到自定义域域名
+# echo 'www.example.com' > CNAME
+
 git init
 git add -A
 git commit -m 'deploy'
-# 提交到 https://github.com:nusr/resume-vue 项目的 gh-pages 分支
+
+# 部署到 https://<USERNAME>.github.io
+# git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
+
+# 部署到 https://<USERNAME>.github.io/<REPO>
 git push -f git@github.com:Dasiylight/draw.git main:gh-pages
+
 cd -
