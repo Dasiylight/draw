@@ -49,7 +49,7 @@ export default {
         },
       ]
       // this.$router.push('/sarcf')
-      axios.post('http://1.14.147.35:8866/main/ans/addAnswer',data,{}).then((response)=>{
+      axios.post('http://api/main/ans/addAnswer',data,{}).then((response)=>{
         console.log(response)
         this.$router.push('/sarcf')
         // if(response.data.code == '500'){

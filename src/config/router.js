@@ -23,7 +23,7 @@ const routes = [
     {
       path:'/',
       // redirect:'/frail'
-      component:Q2
+      component:Frail
     },
     {
       path:'/q1',

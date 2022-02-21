@@ -41,6 +41,7 @@ export default{
   },
   methods: {
     onsubmit(){
+      let userId = this.data.userId ? this.data.userId:12
       let url = '/api/main/ans/checkClock/' + userId
       this.axios.get(
         url
