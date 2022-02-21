@@ -28,7 +28,7 @@
 </template>
 
 <script>
-  // import axios from 'axios'
+  import axios from 'axios'
 
   let canvas
   let context
@@ -246,29 +246,31 @@
            image.naturalHeight/1.6 +  1.5*lineWidth,
            0,0,
            maxW, maxH)
-          let imgURL = canvas2.toDataURL(MIME_TYPE)
-          let dlink = document.createElement('a')
-          dlink.download = 'pic'+ _this.count
-          _this.count++
-          dlink.href = imgURL
-          dlink.dataset.downloadurl = [MIME_TYPE, dlink.download, dlink.href].join(':');
-          document.body.appendChild(dlink);
-          dlink.click();
-          document.body.removeChild(dlink);
+          // let imgURL = canvas2.toDataURL(MIME_TYPE)
+          // let dlink = document.createElement('a')
+          // dlink.download = 'pic'+ _this.count
+          // _this.count++
+          // dlink.href = imgURL
+          // dlink.dataset.downloadurl = [MIME_TYPE, dlink.download, dlink.href].join(':');
+          // document.body.appendChild(dlink);
+          // dlink.click();
+          // document.body.removeChild(dlink);
           canvas2.toBlob((blob)=>{
             let formData = new FormData()
             formData.append('file',blob)
-            formData.append('userid',1)
-            formData.append('quesPid',4)
+            formData.append('userId',999)
+            formData.append('quesPid',666)
             formData.append('quesId',16)
-            axios.post('/api/main/ans/addClock',formData).then((response)=>{
+            axios.post('http://1.14.147.35:8866/main/ans/addClock',formData).then((response)=>{
               console.log(response)
               // this.$router.push('q1a')
               if(response.data.code == '500'){
-                console.log('empty data')
-              }else if (response.data.code == '200'){
-                this.$router.push('q1a')
-              }
+                // console.log('empty data')
+                alert("出现了一些错误")
+              }else if (response.data.code == '0'){
+                  // this.$router.push('q1a')
+                  alert('成功')
+                }
             })
           })
           canvas2.remove()

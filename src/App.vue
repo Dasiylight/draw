@@ -1,20 +1,24 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-  <Q2></Q2>
+   <router-view></router-view>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-import Q2 from './components/Q2.vue'
+// export default {
+//   created(){
+//     axios.get('/api/json', {
+//       params: {}
+//     }).then(
+//       res => {
+//         console.log(res);
+//       }
+//     ).catch(
+//       error => {
+//           console.log(error);
+//       }
+//     )
 
-export default {
-  name: 'App',
-  components: {
-    // HelloWorld
-    Q2
-  }
-}
+//   }
+// }
 </script>
 
 <style>
