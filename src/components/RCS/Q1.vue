@@ -29,7 +29,8 @@
 export default{
   methods: {
     onsubmit(){
-      this.$router.push('q2')
+      let userId = this.$router.params.userId
+      this.$router.push({name:'q2',params:{userId:userId}})
     }
   },
 
