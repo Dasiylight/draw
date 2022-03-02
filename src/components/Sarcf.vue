@@ -4,6 +4,7 @@ export default {
   name:'sarcf',
   data(){
     return{
+      userId:this.$route.params.userId ? this.$route.params.userId : 10,
       form:{
         strength:"",
         walk:"",
@@ -17,31 +18,31 @@ export default {
     onsubmit(){
       let data = [
         {
-          userId: 1,
+          userId: this.userId,
           quesId: 6,
           answer: this.form.strength,
           quesPid: 2
         },
         {
-          userId: 1,
+          userId: this.userId,
           quesId: 7,
           answer: this.form.walk,
           quesPid: 2
         },
         {
-          userId: 1,
+          userId: this.userId,
           quesId: 8,
           answer: this.form.rise,
           quesPid: 2
         },
         {
-          userId: 1,
+          userId: this.userId,
           quesId: 9,
           answer: this.form.climb,
           quesPid: 2
         },
         {
-          userId: 1,
+          userId: this.userId,
           quesId: 10,
           answer: this.form.fall,
           quesPid: 2
@@ -49,7 +50,7 @@ export default {
       ]
       // this.$router.push('snaq')
       axios.post('/api/main/ans/addAnswer',data,{}).then((response)=>{
-        this.$router.push('snaq')
+        this.$router.push({name:'snaq',params:{userId:this.userId}})
       })      
     }
   }

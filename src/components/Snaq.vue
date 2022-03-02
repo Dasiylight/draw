@@ -4,6 +4,7 @@ export default {
   name:'snaq',
   data(){
     return{
+      userId:this.$route.params.userId ? this.$route.params.userId : 10,
       form2:{
         appetite:"",
         tastes:"",
@@ -16,25 +17,25 @@ export default {
     onsubmit(){
       let data = [
         {
-          userId: 1,
+          userId: this.userId,
           quesId: 11,
           answer: this.form2.appetite,
           quesPid: 3
         },
         {
-          userId: 1,
+          userId: this.userId,
           quesId: 12,
           answer: this.form2.tastes,
           quesPid: 3
         },
         {
-          userId: 1,
+          userId: this.userId,
           quesId: 13,
           answer: this.form2.eat,
           quesPid: 3
         },
         {
-          userId: 1,
+          userId: this.userId,
           quesId: 14,
           answer: this.form2.meal,
           quesPid: 3
@@ -42,7 +43,7 @@ export default {
       ]
       axios.post('/api/main/ans/addAnswer',data).then((response)=>{
         console.log(response)
-        this.$router.push('q1')
+        this.$router.push({name:'q1',params:{userId:this.userId}})
       })
 
     }

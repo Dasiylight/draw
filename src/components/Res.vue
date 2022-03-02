@@ -8,22 +8,23 @@ export default {
       sarcfScore:0,
       snaqScore:0,
       rcsScore:0,
-      isTrue:false,
+      isPass:false,
       isFrail: false,
       isSarcf: false,
       isSnaq: false,
       isDementia: false,
       isHealthy: true,
-      userId:1
+      userId:this.$route.params.userId?this.$route.params.userId:999
     }
   },
   mounted(){
-    if (this.$route.params.isTrue == 'Pass'){
-      this.data.isTrue = true
-    }else if(this.$route.params.isTrue == 'Fail'){
-      this.data.isTrue = false
+    console.log(this.$route.params.isPass)
+    if (this.$route.params.isPass == 'Pass'){
+      this.isPass = true
+    }else if(this.$route.params.isPass == 'Fail'){
+      this.isPass = false
     }
-    let url = '/api/main/res/getResult/' + userId
+    let url = '/api/main/res/getResult/' + this.userId
     axios.get(
       url
     ).then((res)=>{
@@ -73,31 +74,31 @@ export default {
         <el-row :gutter='20'>
         <el-col :span="6">
           <el-card class="card">
-            <el-progress type='circle' :percentage='frailScore' :status="isFrail ? 'warning':'success'" />
+            <el-progress type='circle' :percentage='100-frailScore*20' :status="isFrail ? 'warning':'success'" />
             <p style="font-weight:bold">FRAIL test</p>
             <p>You are in prefrail situation</p>            
           </el-card>
         </el-col>
         <el-col :span="6">
           <el-card class="card">
-            <el-progress type='circle' :percentage='sarcfScore' :status='isSarcf ? "warning":"success"' />
+            <el-progress type='circle' :percentage='100-sarcfScore*20' :status='isSarcf ? "warning":"success"' />
             <p style="font-weight:bold">Screen for Sarcopenia</p>
             <p>You do not have Sarcopenia</p>
           </el-card>
         </el-col>
         <el-col :span="6">
           <el-card class="card">
-            <el-progress type='circle' :percentage='snaqScore' :status='isSnaq ? "warning":"success"' />
+            <el-progress type='circle' :percentage='snaqScore*5' :status='isSnaq ? "warning":"success"' />
             <p style="font-weight:bold">Nutritional Assessment</p>
             <p>You are in good Nutritional situation</p>
           </el-card>
         </el-col>
         <el-col :span="6">
           <el-card class="card">
-            <el-progress  type='circle' :percentage='20'  :status='isTrue ? "success":"warning"' />
+            <el-progress  type='circle' :percentage='80'  :status='isPass ? "success":"warning"' />
             <p style="font-weight:bold">Rapid Cognitive Screen (Clock check)</p>
-            <p v-if="isTrue">Pass the clock check</p>
-            <p v-else>Do not pass the clock check</p>
+            <p v-if="isPass">Pass the clock check</p>
+            <p v-else>Clock check failed</p>
           </el-card>
         </el-col>
       </el-row>

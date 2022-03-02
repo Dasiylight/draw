@@ -4,59 +4,62 @@ export default {
   name:'frail',
   data(){
     return{
+      userId:999,
       form1:{
         fatigue:"",
         resistance:"",
         aerobic:"",
         illness:"",
-        weight:""
+        weight:"",
       }
     }
   },
   methods: {
     toNext(){
-      console.log("to next")
       let data = [
         {
-          userId: 1,
+          userId: this.userId,
           quesId: 1,
           answer: this.form1.fatigue,
           quesPid: 1
         },
         {
-          userId: 1,
+          userId: this.userId,
           quesId: 2,
           answer: this.form1.resistance,
           quesPid: 1
         },
         {
-          userId: 1,
+          userId: this.userId,
           quesId: 3,
           answer: this.form1.aerobic,
           quesPid: 1
         },
         {
-          userId: 1,
+          userId: this.userId,
           quesId: 4,
           answer: this.form1.illness,
           quesPid: 1
         },
         {
-          userId: 1,
+          userId: this.userId,
           quesId: 5,
           answer: this.form1.weight,
           quesPid: 1
         },
       ]
       // this.$router.push('/sarcf')
-      axios.post('http://api/main/ans/addAnswer',data,{}).then((response)=>{
+      axios.post('/api/main/ans/addAnswer',data,{}).then((response)=>{
         console.log(response)
-        this.$router.push('/sarcf')
-        // if(response.data.code == '500'){
-        //   condole.log('empty choice')
-        // }else if (response.data.code == '200'){
-        //   this.$router.push('/sarcf')
-        // }
+        // this.$router.push('/sarcf')
+        if(response.data.code == '500'){
+          condole.log('empty choice')
+        }else{
+          this.$router.push({
+            name:'sarcf',
+            params:{userId:this.userId}
+            })
+        }
       })
     }
   }
@@ -69,7 +72,18 @@ export default {
       The Simple “FRAIL” Questionnaire
     </el-header>
     <el-main>
+      
       <el-form ref="form" :model="form1" label-position="top">
+        <el-form-item label="Please input your ID" style="width:20vw">
+          <el-input 
+            type="number" 
+            min=0 
+            v-model="userId" 
+            placeholder="Please input your id" 
+            style="float:left"
+          />
+        </el-form-item>
+        <div style="height:4vh"></div>
         <el-form-item label="1. Are you fatigued?">
           <el-radio-group v-model="form1.fatigue">
             <el-radio label=1>Yes</el-radio>

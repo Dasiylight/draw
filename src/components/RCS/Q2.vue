@@ -43,6 +43,7 @@
   export default{
     data(){
       return{
+        userId:this.$route.params.userId ? this.$route.params.userId : 999,
         count:0
       }
     },
@@ -258,19 +259,29 @@
           canvas2.toBlob((blob)=>{
             let formData = new FormData()
             formData.append('file',blob)
-            formData.append('userId',999)
-            formData.append('quesPid',666)
+            formData.append('userId',_this.userId)
+            formData.append('quesPid',4)
             formData.append('quesId',16)
-            axios.post('http://1.14.147.35:8866/main/ans/addClock',formData).then((response)=>{
-              console.log(response)
-              // this.$router.push('q1a')
-              if(response.data.code == '500'){
-                // console.log('empty data')
-                alert("出现了一些错误")
-              }else if (response.data.code == '0'){
-                  // this.$router.push('q1a')
-                  alert('成功')
-                }
+            let data = [{
+              userId: _this.userId,
+              quesId: 16,
+              answer: -1,
+              quesPid: 4
+            }]
+            console.log(data)
+            axios.post('/api/main/ans/addAnswer',data).then(res=>{
+              console.log(res)
+              axios.post('/api/main/ans/addClock',formData).then((response)=>{
+                console.log(response)
+                // this.$router.push('q1a')
+                if(response.data.code == '500'){
+                  // console.log('empty data')
+                  alert("出现了一些错误")
+                }else{
+                    _this.$router.push({name:"q1a",params:{userId:_this.userId}})
+                    alert('成功')
+                  }
+              })
             })
           })
           canvas2.remove()

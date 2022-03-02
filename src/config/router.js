@@ -10,14 +10,17 @@ import Res from '../components/Res.vue'
 const routes = [
     {
       path:'/frail',
+      name:'frail',
       component:Frail
     },
     {
       path:'/sarcf',
+      name:'sarcf',
       component:Sarcf
     },
     {
       path:'/snaq',
+      name:'snaq',
       component:Snaq
     },
     {
@@ -27,18 +30,22 @@ const routes = [
     },
     {
       path:'/q1',
+      name:'q1',
       component:Q1
     },
     {
       path:'/q2',
+      name:'q2',
       component:Q2
     },
     {
       path:'/q1a',
+      name:'q1a',
       component:Q1a
     },
     {
       path:'/res',
+      name:'res',
       component:Res
     }
 

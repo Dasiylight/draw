@@ -20,7 +20,7 @@
         <el-input v-model="obj5" id='input'></el-input>
       </el-col>
     </el-row>
-    <el-button type="primary" @click="onsubmit" id='button'>
+    <el-button type="primary"  @click="onsubmit" id='button'>
       Next
     </el-button>
   </div>
@@ -28,10 +28,12 @@
 
 <script>
 import axios from 'axios'
+import { ElLoading } from 'element-plus'
 
 export default{
   data(){
     return{
+      userId:this.$route.params.userId?this.$route.params.userId:999,
       obj1:'',
       obj2:'',
       obj3:'',
@@ -41,12 +43,19 @@ export default{
   },
   methods: {
     onsubmit(){
-      let userId = this.data.userId ? this.data.userId:12
+      let userId = this.userId 
       let url = '/api/main/ans/checkClock/' + userId
-      this.axios.get(
+      const loading = ElLoading.service({
+        lock: true,
+        text: 'Loading',
+        background: 'rgba(0, 0, 0, 0.7)',
+      })
+      axios.get(
         url
       ).then((res)=>{
-        this.$router.push({name:'res',params:{isPass:res.message}});
+        console.log(res)
+        loading.close()
+        this.$router.push({name:'res',params:{isPass:res.data.message,userId:userId}});
       })
     }
   }
