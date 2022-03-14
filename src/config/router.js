@@ -6,6 +6,8 @@ import Q1 from '../components/RCS/Q1.vue'
 import Q2 from '../components/RCS/Q2.vue'
 import Q1a from '../components/RCS/Q1a.vue'
 import Res from '../components/Res.vue'
+import Home from '../components/Home.vue'
+import History from '../components/History.vue'
 
 const routes = [
     {
@@ -26,7 +28,7 @@ const routes = [
     {
       path:'/',
       // redirect:'/frail'
-      component:Frail
+      component:Home
     },
     {
       path:'/q1',
@@ -47,6 +49,16 @@ const routes = [
       path:'/res',
       name:'res',
       component:Res
+    },
+    {
+      path:'/home',
+      name:'home',
+      component:Home
+    },
+    {
+      path:'/history',
+      name:'history',
+      component:History
     }
 
   ]

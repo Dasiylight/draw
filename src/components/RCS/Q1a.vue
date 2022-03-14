@@ -43,6 +43,23 @@ export default{
   },
   methods: {
     onsubmit(){
+      let res = ['apple','pen','tie','house','car']
+      let data = [this.obj1, this.obj2,this.obj3,this.obj4,this.obj5]
+      let score = 0
+      data.map((val)=>{
+        let temp = res.indexOf(val.toLowerCase())
+        if(temp!=-1){
+          score++;
+          res.splice(temp,1)
+        }
+      });
+      console.log(score)
+      let toSend = [{
+        userId: this.userId,
+        quesId: 15,
+        answer: score,
+        quesPid: 4
+      }]
       let userId = this.userId 
       let url = '/api/main/ans/checkClock/' + userId
       const loading = ElLoading.service({
@@ -50,13 +67,17 @@ export default{
         text: 'Loading',
         background: 'rgba(0, 0, 0, 0.7)',
       })
-      axios.get(
-        url
-      ).then((res)=>{
-        console.log(res)
-        loading.close()
-        this.$router.push({name:'res',params:{isPass:res.data.message,userId:userId}});
-      })
+      axios.post(
+        '/api/main/ans/addAnswer',toSend
+      ).then(()=>{
+        axios.get(
+            url
+          ).then((res)=>{
+            console.log(res)
+            loading.close()
+            this.$router.push({name:'res',params:{isPass:res.data.message,userId:userId}});
+          })
+        })
     }
   }
 }

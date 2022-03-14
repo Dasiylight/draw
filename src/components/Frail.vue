@@ -4,11 +4,11 @@ export default {
   name:'frail',
   data(){
     return{
-      userId:999,
+      userId:this.$route.params.userId?this.$route.params.userId:999,
       form1:{
         fatigue:"",
         resistance:"",
-        aerobic:"",
+        aerobic:  "",
         illness:"",
         weight:"",
       }
@@ -74,15 +74,6 @@ export default {
     <el-main>
       
       <el-form ref="form" :model="form1" label-position="top">
-        <el-form-item label="Please input your ID" style="width:20vw">
-          <el-input 
-            type="number" 
-            min=0 
-            v-model="userId" 
-            placeholder="Please input your id" 
-            style="float:left"
-          />
-        </el-form-item>
         <div style="height:4vh"></div>
         <el-form-item label="1. Are you fatigued?">
           <el-radio-group v-model="form1.fatigue">

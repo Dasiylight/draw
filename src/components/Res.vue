@@ -17,6 +17,14 @@ export default {
       userId:this.$route.params.userId?this.$route.params.userId:999
     }
   },
+  methods:{
+    toNext(){
+      this.$router.push({
+          name:'history',
+          params:{userId:this.userId}
+      })
+    }
+  },
   mounted(){
     console.log(this.$route.params.isPass)
     if (this.$route.params.isPass == 'Pass'){
@@ -102,6 +110,10 @@ export default {
           </el-card>
         </el-col>
       </el-row>
+      <div style="height:10vh"/>
+      <el-button type="primary" @click="toNext" >
+        History
+      </el-button>
       </el-main>
     </el-container>
   </body>
